@@ -9,8 +9,8 @@ class HomesController < ApplicationController
 		def index
 			secret_key = ENV['secret_key']
 			word_query = random_word
-			response = HTTParty.get("http://api.giphy.com/v1/gifs/search?q=#{word_query}&api_key=#{secret_key}")
-
-		  @response = response.parsed_response["data"].sample
+			response = HTTParty.get("http://api.giphy.com/v1/gifs/search?q=#{word_query}&api_key=#{secret_key}&limit=116")
+			@random = rand(110).to_i
+		  @response = response.parsed_response["data"][@random]["images"]["original"]["url"]
 		end
 end
